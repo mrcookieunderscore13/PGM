@@ -6,6 +6,7 @@ import net.kyori.text.Component;
 import net.kyori.text.TextComponent;
 import net.kyori.text.TranslatableComponent;
 import net.kyori.text.format.TextColor;
+import org.bukkit.GameMode;
 import org.bukkit.event.Event;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -45,6 +46,11 @@ public class Dead extends Spawning {
 
     if (!options.spectate) player.setFrozen(true);
 
+    if (options.betterSpecate && !player.isLegacy()) {
+      player.setFrozen(true);
+      super.requestSpawn();
+    }
+
     // Show red vignette
     NMSHacks.showBorderWarning(player.getBukkit(), true);
   }
@@ -78,6 +84,10 @@ public class Dead extends Spawning {
       // Make player invisible after the death animation is complete
       player.setVisible(false);
       player.resetGamemode();
+      if (options.betterSpecate && !player.isLegacy()) {
+        player.setGameMode(GameMode.SPECTATOR);
+        super.cycleSpectate(true);
+      }
     }
 
     super.tick(); // May transition to a different state, so call last

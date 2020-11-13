@@ -11,6 +11,7 @@ public class RespawnOptions {
   public final boolean auto; // Force dead players to respawn as soon as they can
   public final boolean blackout; // Blind dead players
   public final boolean spectate; // Allow dead players to fly around
+  public final boolean betterSpecate; // Use observer mode to allow spectating
   public final boolean bedSpawn; // Allow players to respawn from beds
   public final @Nullable Component message; // Message to show respawning players, after the delay
 
@@ -28,5 +29,6 @@ public class RespawnOptions {
     this.spectate = spectate;
     this.bedSpawn = bedSpawn;
     this.message = message;
+    this.betterSpecate = true;
   }
 }

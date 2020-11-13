@@ -7,6 +7,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerAttackEntityEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import tc.oc.pgm.api.event.PlayerItemTransferEvent;
 import tc.oc.pgm.api.match.event.MatchFinishEvent;
@@ -75,11 +76,15 @@ public abstract class State {
 
   public void onEvent(final MatchPlayerDeathEvent event) {}
 
+  public void otherMatchPlayerDeath(final MatchPlayerDeathEvent event) {}
+
   public void onEvent(final InventoryClickEvent event) {}
 
   public void onEvent(final PlayerInteractEvent event) {}
 
   public void onEvent(final PlayerAttackEntityEvent event) {}
+
+  public void onEvent(final PlayerInteractEntityEvent event) {}
 
   public void onEvent(final PlayerItemTransferEvent event) {}
 

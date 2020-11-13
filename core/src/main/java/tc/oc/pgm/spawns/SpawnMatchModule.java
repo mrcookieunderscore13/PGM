@@ -17,10 +17,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityInteractEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerAttackEntityEvent;
 import org.bukkit.event.player.PlayerInitialSpawnEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import tc.oc.pgm.api.PGM;
 import tc.oc.pgm.api.event.PlayerItemTransferEvent;
@@ -226,6 +228,15 @@ public class SpawnMatchModule implements MatchModule, Listener, Tickable {
 
   @EventHandler
   public void onAttackEntity(final PlayerAttackEntityEvent event) {
+    MatchPlayer player = match.getPlayer(event.getPlayer());
+    if (player != null) {
+      State state = states.get(player);
+      if (state != null) state.onEvent(event);
+    }
+  }
+
+  @EventHandler
+  public void onEntityInteract(final PlayerInteractEntityEvent event) {
     MatchPlayer player = match.getPlayer(event.getPlayer());
     if (player != null) {
       State state = states.get(player);
